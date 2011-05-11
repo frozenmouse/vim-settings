@@ -67,15 +67,15 @@ cmap s/ s/\v
 " sudo to write
 cmap w!! w !sudo tee % > /dev/null
 
-" disable arrow keys ;)
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
+"" disable arrow keys ;)
+"nnoremap <up> <nop>
+"nnoremap <down> <nop>
+"nnoremap <left> <nop>
+"nnoremap <right> <nop>
+"inoremap <up> <nop>
+"inoremap <down> <nop>
+"inoremap <left> <nop>
+"inoremap <right> <nop>
  
 " Easy window navigation
 map <C-h> <C-w>h
