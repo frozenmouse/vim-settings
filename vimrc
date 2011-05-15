@@ -86,6 +86,9 @@ map <C-l> <C-w>l
 " clear highlighted search
 nmap <space> :nohlsearch<CR>
 
+" NERDTree toggle
+nmap <F3> :NERDTreeToggle<CR>
+
 " some ruby convention
 au filetype ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 
@@ -102,3 +105,8 @@ let g:haddock_browser = "google-chrome"
 set runtimepath+=/usr/share/lilypond/2.12.2/vim/
 
 let g:ragtag_global_maps = 1
+
+" Hit enter in the file browser to open the selected
+" file with :vsplit to the right of the browser.
+let g:netrw_browse_split = 2
+let g:netrw_altv = 1
