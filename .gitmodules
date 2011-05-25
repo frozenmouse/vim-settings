@@ -62,3 +62,7 @@
 	path = bundle/supertab
 	url = git://github.com/ervandew/supertab.git
     ignore = dirty
+[submodule "bundle/nginx.vim"]
+	path = bundle/nginx.vim
+	url = git://github.com/vim-scripts/nginx.vim.git
+    ignore = dirty
