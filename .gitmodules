@@ -66,3 +66,7 @@
 	path = bundle/nginx.vim
 	url = git://github.com/vim-scripts/nginx.vim.git
     ignore = dirty
+[submodule "bundle/OmniCppComplete"]
+	path = bundle/OmniCppComplete
+	url = git://github.com/vim-scripts/OmniCppComplete.git
+    ignore = dirty
