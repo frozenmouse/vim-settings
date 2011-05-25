@@ -43,3 +43,6 @@
 [submodule "bundle/dogmatic.vim"]
 	path = bundle/dogmatic.vim
 	url = git://github.com/vim-scripts/dogmatic.vim.git
+[submodule "bundle/supertab"]
+	path = bundle/supertab
+	url = git://github.com/ervandew/supertab.git
