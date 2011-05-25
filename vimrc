@@ -89,8 +89,11 @@ nmap <space> :nohlsearch<CR>
 " NERDTree toggle
 nmap <F3> :NERDTreeToggle<CR>
 
+" Split vertically and open BufExplorer
+nmap <F4> :BufExplorerVerticalSplit<CR> 
+
 " some ruby convention
-au filetype ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+au filetype ruby setlocal expandtab shiftwidth=r tabstop=2 softtabstop=2
 
 " Restore cursor position upon reopening files
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
