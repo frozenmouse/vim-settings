@@ -104,12 +104,31 @@ au Bufenter *.hs compiler ghc
 " configure browser for haskell_doc.vim
 let g:haddock_browser = "google-chrome"
 
-" include the lilypond things
-set runtimepath+=/usr/share/lilypond/2.12.2/vim/
-
 let g:ragtag_global_maps = 1
 
 " Hit enter in the file browser to open the selected
 " file with :vsplit to the right of the browser.
 let g:netrw_browse_split = 2
 let g:netrw_altv = 1
+
+" NeoComplCache Settings
+let g:neocomplcache_enable_at_startup = 1
+
+imap <expr><Tab> pumvisible() ? "<C-n>" : neocomplcache#sources#snippets_complete#expandable() ? "<Plug>(neocomplcache_snippets_expand)" : "\<TAB>"
+imap <expr><S-Tab> pumvisible() ? "<C-p>" : "<S-Tab>"
+imap <expr><CR> pumvisible() && neocomplcache#sources#snippets_complete#expandable() ? "<Plug>(neocomplcache_snippets_expand)" : neocomplcache#smart_close_popup()."<CR>"
+
+" Enable heavy omni completion.
+if !exists('g:neocomplcache_omni_patterns')
+    let g:neocomplcache_omni_patterns = {}
+endif
+let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
+let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'     
+
+" Local settings
+if exists("~/.vimrc.local")
+	so "~/.vimrc.local"
+endif
