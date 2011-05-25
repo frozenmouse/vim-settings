@@ -10,10 +10,6 @@
 	path = bundle/localvimrc
 	url = git://github.com/vim-scripts/localvimrc.git
     ignore = dirty
-[submodule "bundle/snipmate.vim"]
-	path = bundle/snipmate.vim
-	url = git://github.com/msanders/snipmate.vim.git
-    ignore = dirty
 [submodule "bundle/vim-fugitive"]
 	path = bundle/vim-fugitive
 	url = git://github.com/tpope/vim-fugitive.git
@@ -58,10 +54,6 @@
 	path = bundle/dogmatic.vim
 	url = git://github.com/vim-scripts/dogmatic.vim.git
     ignore = dirty
-[submodule "bundle/supertab"]
-	path = bundle/supertab
-	url = git://github.com/ervandew/supertab.git
-    ignore = dirty
 [submodule "bundle/nginx.vim"]
 	path = bundle/nginx.vim
 	url = git://github.com/vim-scripts/nginx.vim.git
@@ -74,3 +66,6 @@
 	path = bundle/bufexplorer
 	url = git://github.com/vim-scripts/bufexplorer.zip.git
     ignore = dirty
+[submodule "bundle/neocomplcache"]
+	path = bundle/neocomplcache
+	url = git://github.com/Shougo/neocomplcache.git
