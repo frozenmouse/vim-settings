@@ -3,12 +3,8 @@ set nocompatible
 colorscheme mustang
 syntax on
 
-" Use pathogen to easily modify the runtime path to include all plugins under
-" the ~/.vim/bundle directory
-filetype off                    " force reloading *after* pathogen loaded
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
-filetype plugin indent on       " enable detection, plugins and indenting in one step
+filetype off
+filetype plugin indent on
 
 set mouse=a
 set number
