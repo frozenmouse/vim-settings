@@ -4,6 +4,38 @@ colorscheme mustang
 syntax on
 
 filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+
+" My Bundles here:
+" original repos on github
+Bundle 'tpope/vim-fugitive'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-surround'
+Bundle 'mileszs/ack.vim'
+Bundle 'othree/html5.vim'
+Bundle 'Shougo/neocomplcache'
+Bundle 'scrooloose/nerdtree'
+Bundle 'mattn/zencoding-vim'
+Bundle 'lukerandall/haskellmode-vim'
+
+" vim-scripts repos
+Bundle 'L9'
+Bundle 'FuzzyFinder'
+Bundle 'OmniCppComplete'
+Bundle 'dogmatic.vim'
+Bundle 'localvimrc'
+Bundle 'nginx.vim'
+Bundle 'ragtag.vim'
+Bundle 'taglist.vim'
+
+" non github repos
+
 filetype plugin indent on
 
 set mouse=a
