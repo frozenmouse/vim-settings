@@ -31,6 +31,7 @@ Bundle 'Shougo/neocomplcache-snippets-complete'
 Bundle 'scrooloose/nerdtree'
 Bundle 'mattn/zencoding-vim'
 Bundle 'lukerandall/haskellmode-vim'
+Bundle 'tmatilai/vim-monit'
 
 " vim-scripts repos
 Bundle 'L9'
@@ -181,6 +182,9 @@ let g:rubycomplete_rails = 1
 
 " NeoComplCache snippets settings
 let g:neocomplcache_snippets_dir='~/.vim/snippets'
+
+" vim-monit: auto detect ft for per-user monitrc
+autocmd BufNewFile,BufRead .monitrc set filetype=monitrc
 
 " Local settings
 if exists("~/.vimrc.local")
