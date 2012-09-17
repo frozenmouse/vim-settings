@@ -3,6 +3,13 @@ set nocompatible
 colorscheme mustang
 syntax on
 
+let s:vundle_path = expand('~/.vim/bundle/vundle/')
+if !isdirectory(s:vundle_path)
+    echoerr s:vundle_path . ' not found'
+    echoerr 'Run init.sh first'
+    exit
+endif
+
 filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
