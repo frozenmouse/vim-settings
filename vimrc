@@ -20,6 +20,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'mileszs/ack.vim'
 Bundle 'othree/html5.vim'
 Bundle 'Shougo/neocomplcache'
+Bundle 'Shougo/neocomplcache-snippets-complete'
 Bundle 'scrooloose/nerdtree'
 Bundle 'mattn/zencoding-vim'
 Bundle 'lukerandall/haskellmode-vim'
@@ -121,7 +122,7 @@ nmap <F3> :NERDTreeToggle<CR>
 nmap <F4> :BufExplorerVerticalSplit<CR> 
 
 " some ruby convention
-au filetype ruby setlocal expandtab shiftwidth=r tabstop=2 softtabstop=2
+au filetype ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 
 " Restore cursor position upon reopening files
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
@@ -141,10 +142,24 @@ let g:netrw_altv = 1
 
 " NeoComplCache Settings
 let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_auto_select = 1
 
-imap <expr><Tab> pumvisible() ? "<C-n>" : neocomplcache#sources#snippets_complete#expandable() ? "<Plug>(neocomplcache_snippets_expand)" : "\<TAB>"
-imap <expr><S-Tab> pumvisible() ? "<C-p>" : "<S-Tab>"
-imap <expr><CR> pumvisible() && neocomplcache#sources#snippets_complete#expandable() ? "<Plug>(neocomplcache_snippets_expand)" : neocomplcache#smart_close_popup()."<CR>"
+inoremap <expr><C-\> neocomplcache#start_manual_complete()
+imap <expr><CR> 
+            \ neocomplcache#sources#snippets_complete#expandable() ?
+            \ "\<Plug>(neocomplcache_snippets_expand)" :
+            \ pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+smap <expr><CR> 
+            \ neocomplcache#sources#snippets_complete#expandable() ?
+            \ "\<Plug>(neocomplcache_snippets_expand)" :
+            \ pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+imap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+"inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+"inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplcache#close_popup()
+inoremap <expr><C-e>  neocomplcache#cancel_popup()
+
 
 " Enable heavy omni completion.
 if !exists('g:neocomplcache_omni_patterns')
@@ -155,6 +170,10 @@ let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
 let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'     
+let g:rubycomplete_rails = 1
+
+" NeoComplCache snippets settings
+let g:neocomplcache_snippets_dir='~/.vim/snippets'
 
 " Local settings
 if exists("~/.vimrc.local")
