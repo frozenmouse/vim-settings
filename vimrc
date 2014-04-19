@@ -1,51 +1,56 @@
-set nocompatible
+" NeoBundle Scripts {{{
+if has('vim_starting')
+  set nocompatible " Be iMproved
+
+  " Required:
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+" Required:
+call neobundle#begin(expand('~/.vim/bundle'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" My Bundles here:
+NeoBundle 'flazz/vim-colorschemes'
+NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'lukerandall/haskellmode-vim'
+NeoBundle 'mattn/zencoding-vim'
+NeoBundle 'mileszs/ack.vim'
+NeoBundle 'othree/html5.vim'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'Shougo/neocomplete'
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'tmatilai/vim-monit'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-rails'
+NeoBundle 'tpope/vim-surround'
+" vim-script
+NeoBundle 'dogmatic.vim'
+NeoBundle 'FuzzyFinder'
+NeoBundle 'L9'
+NeoBundle 'localvimrc'
+NeoBundle 'nginx.vim'
+NeoBundle 'OmniCppComplete'
+NeoBundle 'ragtag.vim'
+NeoBundle 'taglist.vim'
+
+" Required:
+call neobundle#end()
+
+" Required:
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+" }}}
 
 colorscheme mustang
 syntax on
-
-let s:vundle_path = expand('~/.vim/bundle/vundle/')
-if !isdirectory(s:vundle_path)
-    echoerr s:vundle_path . ' not found'
-    echoerr 'Run init.sh first'
-    exit
-endif
-
-filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-" let Vundle manage Vundle
-" required! 
-Bundle 'gmarik/vundle'
-
-" My Bundles here:
-" original repos on github
-Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-surround'
-Bundle 'mileszs/ack.vim'
-Bundle 'othree/html5.vim'
-Bundle 'Shougo/neocomplcache'
-Bundle 'Shougo/neocomplcache-snippets-complete'
-Bundle 'scrooloose/nerdtree'
-Bundle 'mattn/zencoding-vim'
-Bundle 'lukerandall/haskellmode-vim'
-Bundle 'tmatilai/vim-monit'
-
-" vim-scripts repos
-Bundle 'L9'
-Bundle 'FuzzyFinder'
-Bundle 'OmniCppComplete'
-Bundle 'dogmatic.vim'
-Bundle 'localvimrc'
-Bundle 'nginx.vim'
-Bundle 'ragtag.vim'
-Bundle 'taglist.vim'
-
-" non github repos
-
-filetype plugin indent on
 
 set mouse=a
 set number
@@ -71,7 +76,7 @@ set switchbuf=useopen
 set history=1000
 set undolevels=1000
 
-" persistant undo (since vim 7.3)
+" persistent undo (since vim 7.3)
 set undofile
 set undodir=~/.vim/tmp/undo,~/tmp,/var/tmp,/tmp,.
 
@@ -139,7 +144,7 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "norm
 au Bufenter *.hs compiler ghc
 
 " configure browser for haskell_doc.vim
-let g:haddock_browser = "google-chrome"
+let g:haddock_browser = "xdg-open"
 
 let g:ragtag_global_maps = 1
 
@@ -148,45 +153,53 @@ let g:ragtag_global_maps = 1
 let g:netrw_browse_split = 2
 let g:netrw_altv = 1
 
-" NeoComplCache Settings
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_auto_select = 1
+" neocomplete Settings
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_auto_select = 1
 
-inoremap <expr><C-\> neocomplcache#start_manual_complete()
-imap <expr><CR> 
-            \ neocomplcache#sources#snippets_complete#expandable() ?
-            \ "\<Plug>(neocomplcache_snippets_expand)" :
-            \ pumvisible() ? neocomplcache#close_popup() : "\<CR>"
-smap <expr><CR> 
-            \ neocomplcache#sources#snippets_complete#expandable() ?
-            \ "\<Plug>(neocomplcache_snippets_expand)" :
-            \ pumvisible() ? neocomplcache#close_popup() : "\<CR>"
-imap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+function! s:cr_map()
+"  return pumvisible() ? neocomplete#close_popup() :
+"       \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
+"       \ "\<CR>"
+  return neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
+       \ pumvisible() ? neocomplete#close_popup() : 
+       \ "\<CR>" 
+endfunction
+
+inoremap <expr><C-\>   neocomplete#start_manual_complete()
+imap     <expr><CR>    <SID>cr_map()
+smap     <expr><CR>    <SID>cr_map()
+inoremap <expr><TAB>   pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-"inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-"inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
+inoremap <expr><BS>    neocomplete#smart_close_popup() . "\<BS>"
+inoremap <expr><C-y>   pumvisible() ? neocomplete#close_popup() : "\<C-y>"
+inoremap <expr><C-e>   pumvisible() ? neocomplete#cancel_popup() : "\<C-e>"
 
+" Enable omni completion
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Enable heavy omni completion.
-if !exists('g:neocomplcache_omni_patterns')
-    let g:neocomplcache_omni_patterns = {}
+if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
 endif
-let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
-let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'     
-let g:rubycomplete_rails = 1
+let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+let g:neocomplete#sources#omni#input_patterns.c = '\%(\.\|->\)\h\w*'
+let g:neocomplete#sources#omni#input_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'     
 
-" NeoComplCache snippets settings
-let g:neocomplcache_snippets_dir='~/.vim/snippets'
+let g:rubycomplete_rails = 1
 
 " vim-monit: auto detect ft for per-user monitrc
 autocmd BufNewFile,BufRead .monitrc set filetype=monitrc
 
 " Local settings
 if exists("~/.vimrc.local")
-	so "~/.vimrc.local"
+  so "~/.vimrc.local"
 endif
+
+" vim:et:ts=2:sw=2

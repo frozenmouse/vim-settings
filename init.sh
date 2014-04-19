@@ -1,8 +1,4 @@
 #!/bin/sh
-echo ">> Cloning Vundle to bundle/vundle..."
-git clone git://github.com/gmarik/vundle.git bundle/vundle
-
-echo ">> Updating bundles..."
-vim +BundleInstall +qall
-
+echo ">> Installing NeoBundle..."
+curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
 echo ">> Done."
