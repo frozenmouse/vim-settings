@@ -52,6 +52,7 @@ NeoBundleCheck
 colorscheme mustang
 syntax on
 
+set encoding=utf-8
 set mouse=a
 set number
 set showmode showcmd
