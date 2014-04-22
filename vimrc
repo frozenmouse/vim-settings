@@ -49,8 +49,12 @@ filetype plugin indent on
 NeoBundleCheck
 " }}}
 
-colorscheme mustang
 syntax on
+
+if &t_Co == 256
+  colorscheme mustang
+endif
+
 
 set encoding=utf-8
 set mouse=a
