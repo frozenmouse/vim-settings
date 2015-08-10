@@ -163,9 +163,6 @@ let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_auto_select = 1
 
 function! s:cr_map()
-"  return pumvisible() ? neocomplete#close_popup() :
-"       \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
-"       \ "\<CR>"
   return neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
        \ pumvisible() ? neocomplete#close_popup() : 
        \ "\<CR>" 
