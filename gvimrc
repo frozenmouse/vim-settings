@@ -1,4 +1,4 @@
-set guifont=Monaco\ 12
+set guifont=Monospace\ 14
 
 " Remove toolbar, left scrollbar and right scrollbar
 set guioptions-=T
