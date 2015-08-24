@@ -9,6 +9,8 @@ endif
 " Required:
 call neobundle#begin(expand('~/.vim/bundle'))
 
+let g:neobundle#types#git#default_protocol="ssh"
+
 " Let NeoBundle manage NeoBundle
 " Required:
 NeoBundleFetch 'Shougo/neobundle.vim'
